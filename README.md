@@ -22,3 +22,18 @@ is converted to a variable number of 7-bit numbers. Then a bit is added to diffe
 0b_11
 
 and then encoded as three bytes: 0b1110_1110, 0b1101_1101, 0b0000_0011. Note that all bytes but the</br> last byte have the highest bit set to indicate there is more coming.
+
+## Running tests
+
+Navigate to the repo folder. To compile run command:
+
+```
+g++ -o test test.cpp varint_compression.cpp
+```
+
+To run tests, run command:
+
+```
+./test
+```
+
