@@ -1,6 +1,7 @@
 #include "varint_compression.h"
 
 #include <iostream>
+#include <chrono>
 
 int main(){
     bool passed;
@@ -208,6 +209,31 @@ int main(){
     }
 
     std::cout << "Passed " << total_passed << "/" << num_tests << std::endl << std::endl;
+
+
+    std::cout << "<==========     TESTING 100k SEQUENCE COMPRESSION AND DECOMPRESSION TIME     ==========>" << std::endl << std::endl;
+
+    int seq_len = 100000;
+    std::vector<uint64_t> original;
+    original.push_back(1);
+    for (int j = 1; j < seq_len; j++){
+        original.push_back(original[j-1] + (rand() % 10000 + 5));
+    }
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    std::vector<uint8_t> compressed = compress(original);
+    std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+    std::vector<uint64_t> decompressed = decompress(compressed);
+    std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+
+    std::cout << "Compression time = " << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - begin).count() << "[µs]" << std::endl;
+    std::cout << "Decompression time = " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << "[µs]" << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "<==========     TESTING 100k SEQUENCE COMPRESSION RATIO     ==========>" << std::endl << std::endl;
+
+    std::cout << "Original size (bytes) = " << original.size() * 8 << std::endl;
+    std::cout << "Compressed size (bytes) = " << compressed.size() << std::endl;
+    std::cout << "Compression ratio = " << (float) (original.size() * 8) / compressed.size() << std::endl;
 
     return 0;
 }
