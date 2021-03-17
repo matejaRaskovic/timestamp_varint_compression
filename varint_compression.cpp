@@ -1,7 +1,31 @@
 #include "varint_compression.h"
 
-std::vector<uint8_t> compress_single(uint64_t original){
+#include <iostream>
+#include <algorithm>
 
+#define MAX_INTS_FROM_ORIGINAL 10
+
+// The function is used to convert numbers greater than 0 but it will work for 0 too
+std::vector<uint8_t> compress_single(uint64_t original){
+    uint64_t zeros_mask = 0;
+    uint64_t ones_mask = ~zeros_mask;
+    uint64_t positional_mask = ~(ones_mask << 7);  // only the last 7 bits are ones
+    std::vector<uint8_t> varint_compressed_reverse;
+
+    for (int i = 0; i < MAX_INTS_FROM_ORIGINAL; i++){
+        if (!i || original & (ones_mask << (7*i))){
+            uint8_t to_add_int = (original >> (7*i) & positional_mask) | ((i!=0) << 7);
+            varint_compressed_reverse.push_back(to_add_int);
+        } else {
+            break;
+        }
+    }
+
+    // Using push_back and then reverting vector
+    std::vector<uint8_t> varint_compressed(varint_compressed_reverse.size());
+    std::reverse_copy(varint_compressed_reverse.begin(), varint_compressed_reverse.end(), varint_compressed.begin());
+
+    return varint_compressed;
 }
 
 
