@@ -94,5 +94,77 @@ int main(){
 
     std::cout << "Passed " << num_passed_1 << "/" << total_1 << std::endl << std::endl;
 
+
+    std::cout << "<==========     TESTING DECOMPRESS SINGLE 64 BIT INT     ==========>" << std::endl << std::endl;
+    int num_passed_2 = 0, total_2 = 0;
+
+    // test 1
+    std::cout << "Test 1:" << std::endl;
+    passed = true;
+    std::vector<uint8_t> t2_1{0xEA, 0x0B};
+    std::cout << "Input: ";
+    for (size_t i = 0; i < t2_1.size(); i++){
+        std::cout << int(t2_1[i]) << " ";
+    }
+    std::cout << std::endl;
+    uint64_t e2_1 = 13579;
+    uint64_t t2_1_decompressed = decompress_single(t2_1);
+    std::cout << "Output:   " << t2_1_decompressed << std::endl;
+    std::cout << "Expected: " << e2_1 << std::endl;
+
+    if (t2_1_decompressed != e2_1){
+        passed = false;
+    }
+    std::cout << std::endl << std::endl;
+    std::cout << (passed ? "PASSED" : "FAILED") << std::endl << std::endl << std::endl;
+    num_passed_2 += passed;
+    total_2++;
+
+    // test 2
+    std::cout << "Test 2:" << std::endl;
+    passed = true;
+    std::vector<uint8_t> t2_2{0x01};
+    std::cout << "Input: ";
+    for (size_t i = 0; i < t2_2.size(); i++){
+        std::cout << int(t2_2[i]) << " ";
+    }
+    std::cout << std::endl;
+    uint64_t e2_2 = 1;
+    uint64_t t2_2_decompressed = decompress_single(t2_2);
+    std::cout << "Output:   " << t2_2_decompressed << std::endl;
+    std::cout << "Expected: " << e2_2 << std::endl;
+
+    if (t2_2_decompressed != e2_2){
+        passed = false;
+    }
+    std::cout << std::endl << std::endl;
+    std::cout << (passed ? "PASSED" : "FAILED") << std::endl << std::endl << std::endl;
+    num_passed_2 += passed;
+    total_2++;
+
+    // test 3
+    std::cout << "Test 2:" << std::endl;
+    passed = true;
+    std::vector<uint8_t> t2_3{0x81, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F};
+    std::cout << "Input: ";
+    for (size_t i = 0; i < t2_3.size(); i++){
+        std::cout << int(t2_3[i]) << " ";
+    }
+    std::cout << std::endl;
+    uint64_t e2_3 = ~0;
+    uint64_t t2_3_decompressed = decompress_single(t2_3);
+    std::cout << "Output:   " << t2_3_decompressed << std::endl;
+    std::cout << "Expected: " << e2_3 << std::endl;
+
+    if (t2_3_decompressed != e2_3){
+        passed = false;
+    }
+    std::cout << std::endl << std::endl;
+    std::cout << (passed ? "PASSED" : "FAILED") << std::endl << std::endl << std::endl;
+    num_passed_2 += passed;
+    total_2++;
+
+    std::cout << "Passed " << num_passed_2 << "/" << total_2 << std::endl << std::endl;
+
     return 0;
 }

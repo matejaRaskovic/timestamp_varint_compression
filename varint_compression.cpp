@@ -35,7 +35,14 @@ std::vector<uint8_t> compress(std::vector<uint64_t> original){
 
 
 uint64_t decompress_single(std::vector<uint8_t> compressed){
+    uint64_t decompressed = 0;
+    size_t num_ints = compressed.size();
+    for (size_t i = 0; i < num_ints; i++){
+        uint8_t bits_to_copy = compressed[i] & ~(1 << 7);
+        decompressed = decompressed | (bits_to_copy << 7*(num_ints-i-1));
+    }
 
+    return decompressed;
 }
 
 
