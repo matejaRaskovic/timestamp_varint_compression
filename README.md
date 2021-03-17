@@ -23,7 +23,17 @@ is converted to a variable number of 7-bit numbers. Then a bit is added to diffe
 
 and then encoded as three bytes: 0b1110_1110, 0b1101_1101, 0b0000_0011. Note that all bytes but the</br> last byte have the highest bit set to indicate there is more coming.
 
-## Running tests
+## Compression and decompression time
+
+For a sequence of 100k timestamps with step up to 10k running times are:
+* Compression: 70 ms
+* Decompression: 22 ms
+
+## Compression ratio
+
+For a sequence of 100k timestamps with step up to 10k compression ratio is ~4
+
+## How to run tests
 
 Navigate to the repo folder. To compile run command:
 
@@ -36,16 +46,4 @@ To run tests, run command:
 ```
 ./test
 ```
-
-## Compression and decompression time
-
-For a sequence of 100k timestamps with step up to 10k running times are:
-* Compression: 70 ms
-* Decompression: 22 ms
-
-## Compression ratio
-
-For a sequence of 100k timestamps with step up to 10k compression ratio is ~4
-
-
 
