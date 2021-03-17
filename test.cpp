@@ -225,8 +225,8 @@ int main(){
     std::vector<uint64_t> decompressed = decompress(compressed);
     std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
 
-    std::cout << "Compression time = " << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - begin).count() << "[µs]" << std::endl;
-    std::cout << "Decompression time = " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << "[µs]" << std::endl;
+    std::cout << "Compression time = " << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - begin).count() << "[ms]" << std::endl;
+    std::cout << "Decompression time = " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << "[ms]" << std::endl;
     std::cout << std::endl;
 
     std::cout << "<==========     TESTING 100k SEQUENCE COMPRESSION RATIO     ==========>" << std::endl << std::endl;
