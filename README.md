@@ -37,3 +37,15 @@ To run tests, run command:
 ./test
 ```
 
+## Compression and decompression time
+
+For a sequence of 100k timestamps with step up to 10k running times are:
+* Compression: 70 ms
+* Decompression: 22 ms
+
+## Compression ratio
+
+For a sequence of 100k timestamps with step up to 10k compression ratio is ~4
+
+
+
