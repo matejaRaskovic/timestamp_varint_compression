@@ -210,6 +210,13 @@ int main(){
 
     std::cout << "Passed " << total_passed << "/" << num_tests << std::endl << std::endl;
 
+    int t123_passed = num_passed_1 + num_passed_2 + total_passed;
+    int total_tests = total_1 + total_2 + num_tests;
+    if (t123_passed == total_tests){
+        std::cout << "ALL TESTS PASSED" << std::endl << std::endl;
+    } else {
+        std::cout << "SOME TESTS FAILED" << std::endl << std::endl;
+    }
 
     std::cout << "<==========     TESTING 100k SEQUENCE COMPRESSION AND DECOMPRESSION TIME     ==========>" << std::endl << std::endl;
 
